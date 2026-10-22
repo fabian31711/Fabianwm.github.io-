@@ -1,0 +1,398 @@
+
+/* =====================================
+   ZUNO VOLT
+   Futuristic Racing Game UI
+===================================== */
+
+:root {
+  --navy: #06101f;
+  --navy-light: #10243d;
+  --blue: #168cff;
+  --cyan: #48e5ff;
+  --yellow: #d9f7ff;
+  --white: #f5f8ff;
+  --muted: #9bb4d1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+}
+
+body {
+  position: relative;
+}
+
+/* Canvas Three.js memenuhi layar */
+canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 27px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+/* Branding ZUNO VOLT */
+.game-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 18px rgba(22, 140, 255, 0.25);
+}
+
+.game-title span {
+  color: var(--cyan);
+}
+
+.game-tagline {
+  color: #a5c4e5;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  line-height: 1.5;
+}
+
+/* Panel skor */
+.score-panel {
+  min-width: 100px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  border: 1px solid rgba(72, 229, 255, 0.24);
+  border-radius: 14px;
+  background: rgba(7, 19, 38, 0.66);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.score-label {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+#score {
+  color: var(--cyan);
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(72, 229, 255, 0.25);
+}
+
+/* Petunjuk kontrol */
+#controls-hint {
+  position: fixed;
+  z-index: 5;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+
+#controls-hint span:not(.hint-divider) {
+  display: inline-grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: white;
+  font-size: 16px;
+  border: 1px solid rgba(72, 229, 255, 0.35);
+  border-radius: 7px;
+  background: rgba(7, 19, 38, 0.65);
+}
+
+.hint-divider {
+  color: var(--cyan);
+}
+
+/* Layar Game Over */
+#game-over {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 10, 24, 0.76);
+  backdrop-filter: blur(10px);
+}
+
+#game-over.hidden {
+  display: none;
+}
+
+.game-over-card {
+  width: min(100%, 390px);
+  padding: 36px 30px 29px;
+  text-align: center;
+  border: 1px solid rgba(72, 229, 255, 0.2);
+  border-radius: 24px;
+  background: linear-gradient(
+    150deg,
+    #142c49,
+    #09172c 75%
+  );
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.4),
+    0 0 45px rgba(22, 140, 255, 0.07);
+  animation: card-enter 0.35s ease both;
+}
+
+/* Ikon petir */
+.over-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  color: var(--cyan);
+  font-size: 27px;
+  border: 1px solid rgba(72, 229, 255, 0.35);
+  border-radius: 16px;
+  background: rgba(72, 229, 255, 0.08);
+  box-shadow: 0 0 25px rgba(72, 229, 255, 0.06);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #9cb6d8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.game-over-card h1 {
+  margin: 0;
+  font-size: clamp(34px, 8vw, 47px);
+  letter-spacing: -2px;
+}
+
+.game-over-card h1 span {
+  color: var(--cyan);
+}
+
+.result-label {
+  margin: 22px 0 5px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+#final-score {
+  margin-bottom: 25px;
+  color: var(--cyan);
+  font-size: 48px;
+  font-weight: 900;
+  text-shadow: 0 0 24px rgba(72, 229, 255, 0.15);
+}
+
+/* Tombol Main Lagi */
+#restart-button {
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--cyan);
+  border-radius: 12px;
+  background: var(--cyan);
+  color: #071326;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#restart-button:hover {
+  transform: translateY(-2px);
+  background: #8af0ff;
+  box-shadow: 0 8px 25px rgba(72, 229, 255, 0.16);
+}
+
+#restart-button:active {
+  transform: translateY(0);
+}
+
+#restart-button span {
+  font-size: 20px;
+}
+
+/* Tombol kembali ke web profil */
+.back-profile-button {
+  display: block;
+  width: 100%;
+  margin: 12px auto 0;
+  padding: 14px 20px;
+  border: 1px solid rgba(72, 229, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(22, 140, 255, 0.06);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-profile-button:hover {
+  background: rgba(72, 229, 255, 0.12);
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.back-profile-button:active {
+  transform: translateY(0);
+}
+
+.back-profile-button:focus-visible,
+#restart-button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.restart-hint {
+  margin: 16px 0 0;
+  color: #8ca5c6;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* Animasi kartu */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Penyesuaian layar kecil */
+@media (max-width: 600px) {
+  #hud {
+    padding: 20px 17px;
+  }
+
+  .game-title {
+    gap: 6px;
+    font-size: 15px;
+    letter-spacing: 3px;
+    padding-top: 8px;
+  }
+
+  .game-tagline {
+    max-width: 180px;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+
+  .score-panel {
+    min-width: 82px;
+    padding: 10px 13px;
+  }
+
+  #score {
+    font-size: 27px;
+  }
+
+  #controls-hint {
+    bottom: 18px;
+    font-size: 9px;
+    gap: 7px;
+    letter-spacing: 1px;
+  }
+
+  .game-over-card {
+    padding: 30px 23px 25px;
+  }
+}
+
+/* Layar sangat kecil */
+@media (max-width: 360px) {
+  #hud {
+    padding: 16px 12px;
+  }
+
+  .game-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .game-tagline {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+
+  .score-panel {
+    min-width: 72px;
+    padding: 9px 10px;
+  }
+
+  #score {
+    font-size: 24px;
+  }
+}
+
+.score-panel {
+  display: none;
+}
+
+
+/* Rapikan judul agar tidak bertumpuk */
+.game-title {
+  display: none;
+}

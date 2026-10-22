@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ZUNO VOLT — Drive. Refuel. Survive.</title>
+
+  <!-- CSS game -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Library Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+
+  <!-- JavaScript game -->
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Tampilan skor dan judul game -->
+  <div id="hud">
+
+    <div class="game-title">
+      ZUNO <span>VOLT</span>
+      <small class="game-tagline">DRIVE. REFUEL. SURVIVE.</small>
+    </div>
+
+    <div class="score-panel">
+      <span class="score-label">SKOR</span>
+      <span id="score">0</span>
+    </div>
+
+  </div>
+
+  <!-- Petunjuk kontrol -->
+  <div id="controls-hint">
+    <span>←</span>
+    KIRI
+    <span class="hint-divider">•</span>
+    KANAN
+    <span>→</span>
+  </div>
+
+  <!-- Layar Game Over -->
+  <div id="game-over" class="hidden">
+
+    <div class="game-over-card">
+
+      <div class="over-icon">⚡</div>
+
+      <p class="eyebrow">ZUNO VOLT / RUN ENDED</p>
+
+      <h1>Game Over<span>.</span></h1>
+
+      <p class="result-label">BAHAN BAKAR TERKUMPUL</p>
+
+      <div id="final-score">0</div>
+
+      <!-- Tombol untuk mengulang game -->
+      <button id="restart-button">
+        Main Lagi <span>↻</span>
+      </button>
+
+      <!-- Tombol kembali ke website profil -->
+      <button id="back-to-profile" class="back-profile-button">
+        ← Kembali ke Profil
+      </button>
+
+      <p class="restart-hint">
+        Hindari kehilangan bahan bakar dan coba pecahkan rekor kamu.
+      </p>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
